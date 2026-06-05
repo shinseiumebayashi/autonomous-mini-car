@@ -87,7 +87,7 @@ def steer_right():
 
 def steer_center():
     print("→ ハンドル中央")
-    pwm_servo.ChangeDutyCycle(7.5)
+    pwm_servo.ChangeDutyCycle(7.0)
 
 # ===== 1キーずつ読むためのヘルパー関数 =====
 def getch():
