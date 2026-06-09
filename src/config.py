@@ -20,8 +20,8 @@ SERVO_PWM_FREQ = 50
 
 # Servo positions (duty cycle %)
 SERVO_CENTER = 7.5
-SERVO_LEFT_MAX = 9.5   # Calibrated for this chassis
-SERVO_RIGHT_MAX = 5.5
+SERVO_LEFT_MAX = 8.7   # Calibrated for this chassis
+SERVO_RIGHT_MAX = 6.3
 
 # ===== Ultrasonic Sensor (HC-SR04) =====
 ULTRASONIC_TRIG = 23
