@@ -34,7 +34,7 @@ This project covers the full stack of building an autonomous mini car: from hard
 - [x] **Phase 1**: Environment setup
 - [x] **Phase 2**: Individual component testing
 - [x] **Phase 3**: Chassis assembly and keyboard-controlled driving
-- [ ] **Phase 4**: Obstacle avoidance with ultrasonic sensors
+- [x] **Phase 4**: Obstacle avoidance with ultrasonic sensors
 - [ ] **Phase 5**: Line tracing with OpenCV + PID control
 - [ ] **Phase 6**: Integration and demo videos
 
