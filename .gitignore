@@ -218,3 +218,13 @@ __marimo__/
 .streamlit/secrets.toml
 *.jpg
 *.png
+# Test outputs
+*.jpg
+*.png
+threshold_*.jpg
+line_*.jpg
+
+# Python
+__pycache__/
+*.pyc
+venv/

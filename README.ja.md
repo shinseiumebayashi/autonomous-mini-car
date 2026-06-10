@@ -2,7 +2,7 @@
 
 Raspberry Pi 4・OpenCV・各種センサーを使って、自律走行できる小型ロボットカーをゼロから自作する個人プロジェクト。組み込みシステム、コンピュータビジョン、ソフトウェア設計のスキルを示すために制作。
 
-> 🇬🇧 [English README](README.md)
+> [English README](README.md)
 
 ## デモ
 
