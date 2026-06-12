@@ -1,10 +1,13 @@
 """
 Line tracing using P (proportional) control.
+P（比例）制御によるライントレース
 
 The robot follows a black line on the ground using camera-based detection.
 Steering is controlled proportional to how far the line is from the image center.
+カメラで黒い線を検出し、画像中心からのズレに比例して操舵量を決定する。
 
 Press Ctrl+C to stop.
+停止するには Ctrl+C を押す。
 """
 
 import sys
@@ -19,11 +22,12 @@ from src.line_detector import LineDetector
 
 
 # ===== Tunable parameters =====
-SPEED = 45 # 走行速度 (0-100)
-KP = 0.0015     # 比例ゲイン (調整必須)
+# 調整可能なパラメータ
+SPEED = 45                  # Driving speed (0-100) / 走行速度
+KP = 0.0015                 # Proportional gain (requires tuning) / 比例ゲイン（調整必須）
 CAMERA_RESOLUTION = (640, 480)
-DETECT_THRESHOLD = 120
-LOST_LINE_TIMEOUT = 0.5  # 線を見失ってから停止までの秒数
+DETECT_THRESHOLD = 120      # Brightness threshold for line detection / 線検出のしきい値
+LOST_LINE_TIMEOUT = 0.5     # Seconds before stopping after line loss / 線を見失ってから停止までの秒数
 
 
 def main():
@@ -44,13 +48,16 @@ def main():
 
     try:
         while True:
+            # Capture image
             # 画像取得
             image = camera.capture_array()
 
+            # Detect line
             # 線検出
             offset = detector.detect(image)
 
             if offset is None:
+                # No line found, stop immediately
                 # 線が見つからないので即停止
                 print("Line lost - stopping")
                 robot.stop()
@@ -58,18 +65,23 @@ def main():
 
             last_line_time = time.time()
 
+            # Calculate steering with P control
+            # offset is normalized to a range usable by the servo
             # P制御で操舵量を計算
-            # offset を -1.0 ~ 1.0 に正規化してサーボに渡す
+            # offset を正規化してサーボに渡す
             steering = offset * KP
             steering = max(-0.6, min(0.6, steering))
 
+            # Steer + drive forward
+            # Sign inversion: offset positive (right) means steer right = negative servo
             # 操舵 + 前進
-            robot.servo.set_angle(-steering)  # 符号反転: offset右(+)なら右に切る = サーボは負
+            # 符号反転: offset右(+) なら右に切る = サーボは負
+            robot.servo.set_angle(-steering)
             robot.motor.forward(SPEED)
 
             print(f"Offset={offset:+4d}  Steering={steering:+.2f}")
 
-            time.sleep(0.03)  # 30Hz程度
+            time.sleep(0.03)  # About 30Hz control loop / 約30Hzの制御ループ
 
     except KeyboardInterrupt:
         print("\nStopping...")
