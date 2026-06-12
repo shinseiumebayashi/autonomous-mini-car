@@ -19,7 +19,7 @@ A personal project to build a small autonomous vehicle from scratch using Raspbe
 
 > I've uploaded the video to YouTube as unlisted videos.
 
-![Robot Overview](docs/images/robot_main.jpg)
+
 ## Overview
 
 This project covers the full stack of building an autonomous mini car: from hardware assembly to computer vision and PID control. The car uses **rear-wheel drive with front-wheel steering** (Ackermann-style) — closer to a real car than typical differential-drive robots.
@@ -157,6 +157,13 @@ Initial obstacle avoidance used random turn direction selection, which could dea
 - **Headless development** via SSH and VSCode Remote-SSH
 - **Reproducible environment** with Python virtual environment and `requirements.txt`
 - **Iterative debugging** with empirical threshold detection scripts
+
+## Documentation
+
+- [📖 Project Story](docs/STORY.md) - Full narrative of the project
+- [🔧 Engineering Challenges](docs/CHALLENGES.md) - Specific problems and solutions
+- [📚 Key Learnings](docs/LEARNINGS.md) - Summary of skills acquired
+
 ## License
 
 MIT — see LICENSE.
