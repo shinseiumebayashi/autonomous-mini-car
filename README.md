@@ -117,6 +117,9 @@ python3 apps/keyboard_drive.py
 | Z | Center steering |
 | Q |
 
+![Robot Overview](docs/images/robot_main.jpg)
+![Robot Side View](docs/images/robot_side.jpg)
+
 ## Project Highlights
 
 ### Real-Machine Parameter Tuning
