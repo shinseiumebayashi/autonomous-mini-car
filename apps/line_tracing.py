@@ -19,11 +19,11 @@ from src.line_detector import LineDetector
 
 
 # ===== Tunable parameters =====
-SPEED = 40           # 走行速度 (0-100)
+SPEED = 45 # 走行速度 (0-100)
 KP = 0.0015     # 比例ゲイン (調整必須)
 CAMERA_RESOLUTION = (640, 480)
 DETECT_THRESHOLD = 120
-LOST_LINE_TIMEOUT = 1.0  # 線を見失ってから停止までの秒数
+LOST_LINE_TIMEOUT = 0.5  # 線を見失ってから停止までの秒数
 
 
 def main():
@@ -51,11 +51,9 @@ def main():
             offset = detector.detect(image)
 
             if offset is None:
-                # 線を見失った
-                elapsed = time.time() - last_line_time
-                print(f"Line lost ({elapsed:.1f}s)")
-                if elapsed > LOST_LINE_TIMEOUT:
-                    robot.stop()
+                # 線が見つからないので即停止
+                print("Line lost - stopping")
+                robot.stop()
                 continue
 
             last_line_time = time.time()

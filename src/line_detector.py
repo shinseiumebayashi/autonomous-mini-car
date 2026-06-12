@@ -10,7 +10,7 @@ import numpy as np
 class LineDetector:
     """黒い線の検出と中心からの偏差計算"""
 
-    def __init__(self, threshold=60, roi_ratio=0.33):
+    def __init__(self, threshold=60, roi_ratio=0.6):
         """
         threshold: 二値化のしきい値（暗い部分=線）
         roi_ratio: 画像下から何割を見るか（0.5 = 下半分）

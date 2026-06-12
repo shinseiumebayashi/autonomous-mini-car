@@ -6,8 +6,20 @@ A personal project to build a small autonomous vehicle from scratch using Raspbe
 
 ## Demo
 
-> 📹 Demo video coming soon
+## Demo
 
+### Full Demo (Overview)
+[![Watch the full demo](docs/images/thumbnail_overview.jpg)](https://youtu.be/bMbf2mNTPEo)
+
+### Obstacle Avoidance
+[![Obstacle avoidance demo](docs/images/thumbnail_obstacle.jpg)](https://youtu.be/IshrE6iSXc4)
+
+### Line Tracing
+[![Line tracing demo](docs/images/thumbnail_linetrace.jpg)](https://youtu.be/zX4fuUpp8hw)
+
+> I've uploaded the video to YouTube as unlisted videos.
+
+![Robot Overview](docs/images/robot_main.jpg)
 ## Overview
 
 This project covers the full stack of building an autonomous mini car: from hardware assembly to computer vision and PID control. The car uses **rear-wheel drive with front-wheel steering** (Ackermann-style) — closer to a real car than typical differential-drive robots.
@@ -104,14 +116,47 @@ python3 apps/keyboard_drive.py
 | X | Stop motors |
 | Z | Center steering |
 | Q |
+
+## Project Highlights
+
+### Real-Machine Parameter Tuning
+Discovered through testing that the chassis exhibited wheel-body interference when the servo was set to its maximum range (±2.0%). Through iterative observation and measurement, identified ±1.2% (8.7 and 6.3 duty cycle) as the optimal range that maintains turning capability without mechanical conflict. This experience reinforced the importance of empirical validation beyond datasheet specifications.
+
+### Threshold Calibration for Different Environments  
+The initial line detection threshold (60) failed on a pink-tinted hardwood floor. Built a diagnostic script (`tests/test_threshold.py`) that analyzes brightness distribution across the captured ROI and tested multiple threshold values systematically. Identified 120 as the optimal threshold for the current environment, demonstrating data-driven parameter optimization.
+
+### Sensor-Driven Decision Making
+Initial obstacle avoidance used random turn direction selection, which could deadlock in corner scenarios. Improved the algorithm to scan left and right distances during the reverse phase, then turn toward the more open direction. This bidirectional scanning approach mimics how autonomous vehicles use sensor data for path planning.
+
 ## What I Learned
 
-- GPIO control at microsecond precision for ultrasonic timing
-- PWM signal generation for motor and servo control
-- Power system isolation between logic (5V) and motor (7.4V) circuits
-- Class-based abstraction for hardware control
-- Ackermann steering vs differential drive trade-offs
+### Hardware Engineering
+- **GPIO timing control** at microsecond precision for ultrasonic distance measurement
+- **PWM signal generation** for both DC motor speed control (1kHz) and servo angle (50Hz)
+- **Power system isolation** between logic (5V via USB-C) and motor (7.4V via batteries) circuits
+- **H-bridge motor driver** (L298N) and direction control logic
+- **Voltage divider** circuits for safe 5V→3.3V signal level conversion
 
+### Software Architecture
+- **Class-based hardware abstraction** to separate application logic from GPIO details
+- **Centralized configuration** in `src/config.py` for maintainability
+- **Reusable components** across multiple applications (keyboard drive, obstacle avoidance, line tracing)
+
+### Computer Vision
+- **OpenCV image processing pipeline**: grayscale → thresholding → noise removal → contour detection
+- **Region of Interest (ROI)** optimization for real-time line detection
+- **Threshold tuning** through empirical brightness analysis (`tests/test_threshold.py`)
+
+### Control Theory
+- **Proportional (P) control** for line following
+- **Real-machine PID tuning**: Started at KP=0.002, observed overshooting in curves, settled at KP=0.0015 after iterative testing
+- **Ackermann steering geometry**: Front-wheel steering vs differential drive trade-offs
+- **Physical constraint awareness**: Adjusted servo max angle from ±2.0% to ±1.2% (8.7 and 6.3 duty cycle %) to avoid wheel-chassis interference
+
+### Embedded Systems Practice
+- **Headless development** via SSH and VSCode Remote-SSH
+- **Reproducible environment** with Python virtual environment and `requirements.txt`
+- **Iterative debugging** with empirical threshold detection scripts
 ## License
 
 MIT — see LICENSE.
