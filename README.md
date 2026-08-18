@@ -113,10 +113,8 @@ python3 apps/keyboard_drive.py
 | D | Steer right |
 | X | Stop motors |
 | Z | Center steering |
-| Q |
+| Q | Quit |
 
-![Robot Overview](docs/images/robot_main.jpg)
-![Robot Side View](docs/images/robot_side.jpg)
 
 ## Project Highlights
 
