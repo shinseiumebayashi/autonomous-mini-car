@@ -6,8 +6,6 @@ A personal project to build a small autonomous vehicle from scratch using Raspbe
 
 ## Demo
 
-## Demo
-
 ### Full Demo (Overview)
 [![Watch the full demo](docs/images/thumbnail_overview.jpg)](https://youtu.be/bMbf2mNTPEo)
 
